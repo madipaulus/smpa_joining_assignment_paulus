@@ -1,6 +1,6 @@
 ---
 title: "Joining Assignment"
-author: "Put Name Here"
+author: "Madison Paulus"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -40,10 +40,10 @@ primary_rep <- read_csv("data/md_primary_precinct_rep.csv") %>%
 ```
 
 Now Combine (stack) the two dataframes into one combined dataframe, so all the records from both tables are in one place to use.
-
+Here, I used the full_join function to combine the primary dem and primary rep datasets.
 ```{r}
 
-
+full_join(primary_rep, primary_dem)
 
 
 
