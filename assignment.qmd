@@ -148,10 +148,13 @@ Demographics of the precincts could make this data story-worthy.
 Choose your own adventure: I want you to come up with a question you could ask of one of the dataframes we've created for this lab. It could involve candidates, or counties or types of voting, but it cannot be a variation of a previous question (so, for example, you can't ask, "What's the average number of votes per precinct in the U.S. Senate primary?").
 
 First write the question and then try to answer it by writing code. If you're not sure of the exact code at a minimum, describe what you think you'd have to do to answer it and what the results would look like.
+How many people voted republican? I couldn't get the code to work but this is how I would go about finding this information.
 
 ```{r}
 
-
+primary_dem_rep_combined %>%
+  filter(Party == "REP") %>%
+   mutate(total_votes = early_votes + election_night_votes + mail_in_ballot_1_votes + provisional_votes + mail_in_ballot_2_votes)
 
 
 
