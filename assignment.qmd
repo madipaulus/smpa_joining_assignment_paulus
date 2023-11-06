@@ -43,7 +43,7 @@ Now Combine (stack) the two dataframes into one combined dataframe, so all the r
 Here, I used the full_join function to combine the primary dem and primary rep datasets.
 ```{r}
 
-full_join(primary_rep, primary_dem)
+primary_dem_rep_combined <- full_join(primary_rep, primary_dem)
 
 
 
@@ -57,10 +57,12 @@ To use clean_names() you apply it to your dataframe like:
 `data <- data %>%`
 
 `clean_names()`
+Here I used the code provided and applied it to my primary_dem_rep_combined data frame.
 
 ```{r}
 
-
+primary_dem_rep_combined_clean <- primary_dem_rep_combined %>%
+  clean_names()
 
 
 
@@ -80,7 +82,7 @@ Next use left_join() to join the two tables based on the unique combination of p
 
 ```{r}
 
-
+left_join(primary_dem_rep_combined_clean, precinct_voting_locations, by = c("county" = "county_code", "election_district_precinct" = "precinct_code"))
 
 
 
@@ -92,10 +94,12 @@ Next use left_join() to join the two tables based on the unique combination of p
 ### Q1.
 
 Write code to produce a `votes` column which is the result of adding together `early_votes`, `election_night_votes`, `provisional_votes` and the mail-in votes, overwriting your dataframe so that it now has that `total_votes` column permanently.
+Here, I created a new dataset primary_combined_votes to save the new total_votes column which I got by using the mutate function and adding early votes, election nigh votes, provisional votes, and both mail in ballot votes columns.
 
 ```{r}
 
-
+primary_combined_votes <- primary_dem_rep_combined_clean %>%
+  mutate(total_votes = early_votes + election_night_votes + mail_in_ballot_1_votes + provisional_votes + mail_in_ballot_2_votes)
 
 ```
 
