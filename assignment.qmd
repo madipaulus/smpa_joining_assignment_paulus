@@ -104,6 +104,7 @@ primary_combined_votes <- primary_dem_rep_combined_clean %>%
 ```
 
 Next, separately write code to show each county and precinct and calculate the total votes in the Governor's race - bearing in mind that each precinct will have multiple rows in the dataframe, but you only want to see one row for each precinct. (So you'll want to use grouping and summarizing.)
+Here, I used my filtered my combined dataset for governor. Then I grouped by county and district and summarised the total votes.
 
 ```{r}
 
@@ -111,20 +112,25 @@ primary_dem_rep_combined_clean %>%
   filter(office_name == "Governor / Lt. Governor") %>%
   group_by(county_name, election_district_precinct) %>%
 summarise("total_governors_race_votes" = sum(early_votes + election_night_votes + mail_in_ballot_1_votes + provisional_votes + mail_in_ballot_2_votes))
-
+arrange(desc("total_governors_race_votes"))
 
 
 ```
 
 What is the name and voting location of the precinct that saw the most votes in the governor's race? *Put answer here*
+For some reason I couldn't get the arrange function to work but what I got from going through manually was Carroll County precinct 5003 with 1956 votes.
 
 ### Q2.
 
 Let's look at the average number of votes in each party's primary race for governor. Take the code you wrote for the last part of Q2, save the results to a new variable and then find the precincts with 0 total votes for governor.
+The precincts that have 0 votes for the governor include: 11020, 15027, 12002, 22002, 24004, 6018, 9043, 13029, 19005, 20017, 9015, and 3008. 
 
 ```{r}
 
-
+new_variable <- primary_dem_rep_combined_clean %>%
+  filter(office_name == "Governor / Lt. Governor") %>%
+  group_by(county_name, election_district_precinct) %>%
+summarise("total_governors_race_votes" = sum(early_votes + election_night_votes + mail_in_ballot_1_votes + provisional_votes + mail_in_ballot_2_votes))
 
 
 
@@ -132,8 +138,10 @@ Let's look at the average number of votes in each party's primary race for gover
 ```
 
 How many precincts are there, and which county has the most? *Put answer here*
+There are 2074 precincts, and Prince George's County has the most with 327.
 
 What else would you need to know about these precincts to know whether this might be worth a story? *Put answer here*
+Demographics of the precincts could make this data story-worthy.
 
 ### Q3.
 
